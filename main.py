@@ -5,7 +5,7 @@ import datetime
 from xml.dom import minidom
 
 #imprime o histograma
-def print_data():
+def get_histograma():
     with open('data', 'r') as arquivo:
         records = [n for n in arquivo]
         data = list()
@@ -15,7 +15,32 @@ def print_data():
             #print(record.split(" ")[2])
     fig, ax = plt.subplots(figsize =(10, 7)) 
     ax.hist(data, bins = 20)
+    
+    #adding extra features     
+    plt.xlabel("heartbeat frequency") 
+    plt.ylabel("# occurrences") 
+    plt.title('histogram for heart rate') 
     plt.savefig('histograma.png')
+
+
+#imprime a distribuicao cumulativa CDF
+def get_CDF():
+    with open('data', 'r') as arquivo:
+        records = [n for n in arquivo]
+        data = list()
+        for record in records:
+            record = record.rstrip("\n")
+            data.append(float(record.split(" ")[2]))
+    
+    fig, ax = plt.subplots(figsize =(10, 7)) 
+    #ax.hist(data, bins=20, cumulative=True, label='CDF', alpha=0.55, color='purple')
+    ax.hist(data, bins=20, density=True, histtype='step', cumulative=True)
+
+    #adding extra features     
+    plt.xlabel("heartbeat frequency") 
+    plt.ylabel("% occurrences") 
+    plt.title('CDF for heart rate') 
+    plt.savefig('CDF.png')
 
 #processa os dados do xml
 def get_heath_rate(filename):
@@ -28,5 +53,7 @@ def get_heath_rate(filename):
 
 if __name__ == "__main__":
     #get_heath_rate('./data-34y.xml')
-    print_data()
+    #get_histograma()
+    #get_CDF()
+
 
