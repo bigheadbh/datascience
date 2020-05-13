@@ -53,7 +53,7 @@ def get_heath_rate(filename):
 
 if __name__ == "__main__":
     #get_heath_rate('./data-34y.xml')
-    #get_histograma()
-    #get_CDF()
+    get_histograma()
+    get_CDF()
 
 
