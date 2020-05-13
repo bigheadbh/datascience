@@ -34,7 +34,7 @@ def get_CDF():
     
     fig, ax = plt.subplots(figsize =(10, 7)) 
     #ax.hist(data, bins=20, cumulative=True, label='CDF', alpha=0.55, color='purple')
-    ax.hist(data, bins=20, density=True, histtype='step', cumulative=True)
+    ax.hist(data, bins=50, density=True, histtype='step', cumulative=True)
 
     #adding extra features     
     plt.xlabel("heartbeat frequency") 
