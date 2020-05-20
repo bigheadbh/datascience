@@ -18,7 +18,7 @@ def get_histograma(records):
     plt.xlabel("heartbeat frequency") 
     plt.ylabel("# occurrences") 
     plt.title('histogram for heart rate') 
-    plt.savefig('../grafico/histograma.png')
+    plt.savefig('../graficos/histograma.png')
 
 #imprime a distribuicao cumulativa CDF
 def get_CDF(records):
@@ -35,7 +35,7 @@ def get_CDF(records):
     plt.xlabel("heartbeat frequency") 
     plt.ylabel("% occurrences") 
     plt.title('CDF for heart rate') 
-    plt.savefig('../grafico/CDF.png')
+    plt.savefig('../graficos/CDF.png')
 
 #processa os dados do xml
 def get_heath_rate(filename):
