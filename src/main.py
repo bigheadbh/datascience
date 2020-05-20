@@ -5,14 +5,12 @@ import datetime
 from xml.dom import minidom
 
 #imprime o histograma
-def get_histograma():
-    with open('data', 'r') as arquivo:
-        records = [n for n in arquivo]
-        data = list()
-        for record in records:
-            record = record.rstrip("\n")
-            data.append(float(record.split(" ")[2]))
-            #print(record.split(" ")[2])
+def get_histograma(records):
+    data = list()
+    for record in records:
+        record = record.rstrip("\n")
+        data.append(float(record.split(" ")[2]))
+        #print(record.split(" ")[2])
     fig, ax = plt.subplots(figsize =(10, 7)) 
     ax.hist(data, bins = 20)
     
@@ -20,17 +18,14 @@ def get_histograma():
     plt.xlabel("heartbeat frequency") 
     plt.ylabel("# occurrences") 
     plt.title('histogram for heart rate') 
-    plt.savefig('histograma.png')
-
+    plt.savefig('../graficos/histograma.png')
 
 #imprime a distribuicao cumulativa CDF
-def get_CDF():
-    with open('data', 'r') as arquivo:
-        records = [n for n in arquivo]
-        data = list()
-        for record in records:
-            record = record.rstrip("\n")
-            data.append(float(record.split(" ")[2]))
+def get_CDF(records):
+    data = list()
+    for record in records:
+        record = record.rstrip("\n")
+        data.append(float(record.split(" ")[2]))
     
     fig, ax = plt.subplots(figsize =(10, 7)) 
     #ax.hist(data, bins=20, cumulative=True, label='CDF', alpha=0.55, color='purple')
@@ -40,7 +35,7 @@ def get_CDF():
     plt.xlabel("heartbeat frequency") 
     plt.ylabel("% occurrences") 
     plt.title('CDF for heart rate') 
-    plt.savefig('CDF.png')
+    plt.savefig('../graficos/CDF.png')
 
 #processa os dados do xml
 def get_heath_rate(filename):
@@ -52,8 +47,9 @@ def get_heath_rate(filename):
 
 
 if __name__ == "__main__":
-    #get_heath_rate('./data-34y.xml')
-    get_histograma()
-    get_CDF()
+    #get_heath_rate('../base_de_dados/data-34y.xml')
+    records = [n for n in open("../base_de_dados/data")]
+    get_histograma(records)
+    get_CDF(records)
 
 
