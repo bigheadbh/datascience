@@ -66,7 +66,7 @@ def get_heath_rate(filename):
 if __name__ == "__main__":
     #get_heath_rate('../base_de_dados/data-34y.xml')
     records = [n for n in open("../base_de_dados/data")]
+    get_heartbeat_per_hour(records)
     get_histograma(records)
     get_CDF(records)
-    get_heartbeat_per_hour(records)
 
