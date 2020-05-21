@@ -37,6 +37,23 @@ def get_CDF(records):
     plt.title('CDF for heart rate') 
     plt.savefig('../graficos/CDF.png')
 
+def get_heartbeat_per_hour(records):
+    infos = [None]*24
+    for record in records:
+        hora = int(record.split(" ")[1].replace("]","").replace("'","").split(":")[0])
+        batimento = float(record.split(" ")[2].replace("\n",""))
+        if infos[hora] is None:
+            infos[hora] = [1, batimento]
+        else:
+            infos[hora] = [infos[hora][0]+1, infos[hora][1]+batimento]
+    for n,info in enumerate(infos):
+        infos[n] = float(infos[n][1]/infos[n][0])
+    plt.plot([i for i in range(len(infos))], infos)
+    plt.xlabel("hours") 
+    plt.ylabel("heartbeat average") 
+    plt.title('Heart Beats per hour') 
+    plt.savefig('../graficos/HBPH.png')
+
 #processa os dados do xml
 def get_heath_rate(filename):
     xmldoc = minidom.parse(filename)
@@ -49,7 +66,7 @@ def get_heath_rate(filename):
 if __name__ == "__main__":
     #get_heath_rate('../base_de_dados/data-34y.xml')
     records = [n for n in open("../base_de_dados/data")]
+    get_heartbeat_per_hour(records)
     get_histograma(records)
     get_CDF(records)
-
 
