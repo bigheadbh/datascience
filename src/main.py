@@ -43,12 +43,12 @@ def get_heartbeat_per_hour(records):
         hora = int(record.split(" ")[1].replace("]","").replace("'","").split(":")[0])
         batimento = float(record.split(" ")[2].replace("\n",""))
         if infos[hora] is None:
-            infos[hora] = [1, batimento]
-        else:
-            infos[hora] = [infos[hora][0]+1, infos[hora][1]+batimento]
-    for n,info in enumerate(infos):
-        infos[n] = float(infos[n][1]/infos[n][0])
-    plt.plot([i for i in range(len(infos))], infos)
+            infos[hora] = []
+        infos[hora].append(batimento)
+    result = []
+    for array in infos:
+        result.append(sum(array)/len(array))
+    plt.plot([i for i in range(len(result))], result)
     plt.xlabel("hours") 
     plt.ylabel("heartbeat average") 
     plt.title('Heart Beats per hour') 
